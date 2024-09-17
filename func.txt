@@ -1,0 +1,43 @@
+typedef struct {
+    int *c;
+} A_type, B_type;
+
+typedef char UINT8;
+
+VOID AMUP_NetworkInstDelCallBack(CDB_TBLID tblId, CDB_RECID recId, UCHAR *value)
+{
+    CLASS_UGWAM_VNETWORKINST_S *networkInst = (CLASS_UGWAM_VNETWORKINST_S *)value;
+    ULONG ret;
+    AM_GW_UP_DBGCNT_ADD(E_AM_NETWORK_INSTANCE_DEL_CALLBACK_2314);
+    if (networkInst == NULL) {
+        AM_UP_WRITE_CRITICAL_LOG("AMUP_NetworkInstDelCallBack: networkInst is NULL.");
+        return;
+    }
+
+    ret = AMUP_DelNetworkInst(networkInst->acNetworkInstance, sizeof(networkInst->acNetworkInstance));
+    if (ret != VOS_OK) {
+        AM_UP_WRITE_CRITICAL_LOG("AMUP_DelNetworkInst fail, NetworkInstance = %s", networkInst->acNetworkInstance);
+    }
+    const int a = 1;
+    int b = sizeof(a);
+
+    int d = 0, e = sizeof(value);
+}
+
+void test_sizeof() {
+    int b;
+    int c = sizeof b;
+    c = sizeof &b;
+    c = sizeof(int);
+    c = sizeof(B_type);
+    c = sizeof(B_type *);
+    c = sizeof(b->c->d);
+    int d;
+    int e = 0, f = 1;
+    int g, f = 3, i = 1 + 1;;
+    for (int j = 0; i < 10; j ++) {
+        printf("123\n");
+    }
+    B_type k;
+    return;
+}
